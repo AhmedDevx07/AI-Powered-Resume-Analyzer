@@ -10,10 +10,18 @@ export function AuthProvider({ children }) {
   const queryClient = useQueryClient();
 
   const refresh = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setUser(null);
+      setLoading(false);
+      return;
+    }
+
     try {
       const { user } = await authApi.me();
       setUser(user);
     } catch {
+      localStorage.removeItem("token");
       setUser(null);
     } finally {
       setLoading(false);
