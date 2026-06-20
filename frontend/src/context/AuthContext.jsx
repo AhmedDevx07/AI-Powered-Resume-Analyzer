@@ -25,13 +25,15 @@ export function AuthProvider({ children }) {
   }, [refresh]);
 
   const login = useCallback(async (credentials) => {
-    const { user } = await authApi.login(credentials);
+    const { user, token } = await authApi.login(credentials);
+    if (token) localStorage.setItem("token", token);
     setUser(user);
     return user;
   }, []);
 
   const register = useCallback(async (payload) => {
-    const { user } = await authApi.register(payload);
+    const { user, token } = await authApi.register(payload);
+    if (token) localStorage.setItem("token", token);
     setUser(user);
     return user;
   }, []);
@@ -46,6 +48,7 @@ export function AuthProvider({ children }) {
     try {
       await authApi.logout();
     } finally {
+      localStorage.removeItem("token");
       setUser(null);
       queryClient.clear();
     }

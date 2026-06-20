@@ -35,6 +35,7 @@ const passwordSchema = z.object({
 function issueSession(res, user) {
   const token = signToken({ sub: user._id.toString() });
   res.cookie(env.cookieName, token, cookieOptions);
+  return token;
 }
 
 router.post(
@@ -50,8 +51,8 @@ router.post(
     const passwordHash = await User.hashPassword(password);
     const user = await User.create({ name, email, passwordHash });
 
-    issueSession(res, user);
-    res.status(201).json({ user });
+    const token = issueSession(res, user);
+    res.status(201).json({ user, token });
   }),
 );
 
@@ -68,8 +69,8 @@ router.post(
     const ok = await user.comparePassword(password);
     if (!ok) throw ApiError.unauthorized("Invalid credentials");
 
-    issueSession(res, user);
-    res.json({ user });
+    const token = issueSession(res, user);
+    res.json({ user, token });
   }),
 );
 
