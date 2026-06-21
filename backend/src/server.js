@@ -12,7 +12,7 @@ const dashboardRouter = require("./routes/dashboard");
 const insightsRouter = require("./routes/insights");
 const versionsRouter = require("./routes/versions");
 const historyRouter = require("./routes/history");
-const dns = require("dns");
+// const dns = require("dns");
 
 const app = express();
  
@@ -23,7 +23,7 @@ const allowedOrigins = [
   "https://ai-powered-resume-analyzer-pied.vercel.app", // Aapka frontend url
   "http://localhost:5173", // Local development ke liye
 ];
-dns.setServers(["8.8.8.8", "8.8.4.4"]);
+// dns.setServers(["8.8.8.8", "8.8.4.4"]);
 app.use(
   cors({
     origin: function (origin, callback) {
