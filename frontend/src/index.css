@@ -134,3 +134,12 @@ body {
 [data-theme="dark"] ::-webkit-scrollbar-track {
   background: rgba(47, 74, 58, 0.05);
 }
+
+/* Hide scrollbar for elements with no-scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

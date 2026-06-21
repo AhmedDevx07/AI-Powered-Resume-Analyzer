@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const apiClient = axios.create({
-  // Agar browser local chal raha ho to '/api' (jo proxy se chalega), warna live Vercel backend link!
+  
   baseURL:
     window.location.hostname === "localhost"
       ? "/api"

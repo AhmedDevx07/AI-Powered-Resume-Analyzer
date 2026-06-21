@@ -117,24 +117,35 @@ export default function ResumeDetail() {
 
   return (
     <div className="space-y-6">
-      <PageHeader
-        title={resume?.title || "Resume"}
-        description={
-          resume
-            ? `Updated ${relativeTime(resume.updatedAt)} · ${versions.length} version${
-                versions.length > 1 ? "s" : ""
-              }`
-            : ""
-        }
-        actions={
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" onClick={() => nav("/resumes")}>
-              <ArrowLeft size={14} /> All resumes
-            </Button>
-             
-          </div>
-        }
-      />
+       <PageHeader
+  title={
+    // break-words ya truncate laga kar long headings ko handle karein
+    <h1 className="text-xl md:text-2xl font-bold tracking-tight break-words max-w-[250px] sm:max-w-none">
+      {resume?.title || "Resume"}
+    </h1>
+  }
+  description={
+    <p className="text-sm text-muted-foreground mt-1">
+      {resume
+        ? `Updated ${relativeTime(resume.updatedAt)} · ${versions.length} version${
+            versions.length > 1 ? "s" : ""
+          }`
+        : ""}
+    </p>
+  }
+  actions={
+    // Mobile par block/column aur laptop par row flex-row
+    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 mt-3 sm:mt-0 w-full sm:w-auto">
+      <Button 
+        variant="ghost" 
+        onClick={() => nav("/resumes")}
+        className="w-full sm:w-auto justify-start sm:justify-center"
+      >
+        <ArrowLeft size={14} className="mr-1" /> All resumes
+      </Button>
+    </div>
+  }
+/>
 
       <Card>
         <div className="flex flex-wrap items-end gap-4 justify-between">

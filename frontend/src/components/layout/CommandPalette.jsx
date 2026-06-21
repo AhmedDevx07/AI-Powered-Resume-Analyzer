@@ -164,7 +164,7 @@ export function CommandPalette({ open, onClose }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-start justify-center pt-[14vh] px-4"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-4 md:pt-[14vh] px-2 sm:px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -198,7 +198,7 @@ export function CommandPalette({ open, onClose }) {
               </kbd>
             </div>
 
-            <div ref={listRef} className="max-h-[52vh] overflow-y-auto p-2">
+            <div ref={listRef} className="max-h-[80vh] md:max-h-[52vh] overflow-y-auto p-2">
               {items.length === 0 && (
                 <div className="text-center text-sm text-[var(--ink-muted)] py-10">
                   No matches for &ldquo;{query}&rdquo;

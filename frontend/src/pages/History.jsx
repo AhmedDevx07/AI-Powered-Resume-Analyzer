@@ -94,7 +94,8 @@ export default function History() {
         description="Everything you've done across your resumes, in time order."
       />
 
-      <div className="inline-flex items-center gap-1 bg-[var(--surface)] border border-[var(--border)] p-1 rounded-full shadow-card">
+      <div className="flex overflow-x-auto no-scrollbar pb-1 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <div className="inline-flex shrink-0 items-center gap-1 bg-[var(--surface)] border border-[var(--border)] p-1 rounded-full shadow-card">
         {FILTERS.map((f) => {
           const Icon = f.icon;
           const count = totals[f.key] ?? events.length;
@@ -125,6 +126,7 @@ export default function History() {
             </button>
           );
         })}
+        </div>
       </div>
 
       {grouped.length === 0 ? (

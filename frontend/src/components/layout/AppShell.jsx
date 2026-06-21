@@ -8,6 +8,7 @@ import { CommandPalette } from "./CommandPalette";
 export function AppShell() {
   const location = useLocation();
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const openPalette = useCallback(() => setPaletteOpen(true), []);
   const closePalette = useCallback(() => setPaletteOpen(false), []);
@@ -31,13 +32,20 @@ export function AppShell() {
   // close on route change
   useEffect(() => {
     setPaletteOpen(false);
+    setMobileMenuOpen(false);
   }, [location.pathname]);
 
   return (
     <div className="min-h-screen flex bg-[var(--bg)]">
-      <Sidebar />
-      <main className="flex-1 px-6 md:px-8 py-6 max-w-[1600px] mx-auto w-full">
-        <Topbar onOpenPalette={openPalette} />
+      <Sidebar 
+        mobileOpen={mobileMenuOpen} 
+        onCloseMobile={() => setMobileMenuOpen(false)} 
+      />
+      <main className="flex-1 px-4 sm:px-6 md:px-8 py-6 max-w-[1600px] mx-auto w-full min-w-0">
+        <Topbar 
+          onOpenPalette={openPalette} 
+          onOpenMobileMenu={() => setMobileMenuOpen(true)}
+        />
         <AnimatePresence mode="wait">
           <motion.div
             key={location.pathname}
